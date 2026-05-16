@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional menu builder for Samruddhi Event's Organizer and Caterers.">
+  <title>Samruddhi Menu Builder</title>
+  <link rel="stylesheet" href="assets/css/samruddhi-menu-builder.css">
+  <script defer src="assets/js/samruddhi-menu-data.js"></script>
+  <script defer src="assets/js/samruddhi-menu-builder.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand" aria-label="Samruddhi Event's Organizer and Caterers">
+      <div class="brand-mark" aria-hidden="true">S</div>
+      <div>
+        <h1>SAMRUDDHI</h1>
+        <p data-i18n="brandTagline">Event's Organizer &amp; Caterers</p>
+      </div>
+    </div>
+
+    <div class="header-actions" aria-label="Primary actions">
+      <span class="total-badge" id="totalBadge">0 items</span>
+      <button class="btn btn-language" type="button" data-action="toggle-language" id="languageToggle">हिन्दी</button>
+      <button class="btn btn-ghost" type="button" data-action="clear" data-i18n="clear">Clear</button>
+      <button class="btn btn-secondary" type="button" data-action="estimate" data-i18n="estimate">Estimate</button>
+      <button class="btn btn-primary" type="button" data-action="menu" data-i18n="menu">Menu</button>
+      <button class="btn btn-accent" type="button" data-action="download" data-i18n="download">Download</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="event-panel" aria-labelledby="eventDetailsTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow" data-i18n="eventDetails">Event Details</p>
+          <h2 id="eventDetailsTitle" data-i18n="functionProfile">Function profile</h2>
+        </div>
+        <span class="autosave-status" id="autosaveStatus" aria-live="polite" data-i18n="autosaved">Autosaved</span>
+      </div>
+
+      <div class="field-grid">
+        <label class="field">
+          <span data-i18n="functionGuest">Function / Guest</span>
+          <input type="text" id="guestName" autocomplete="name" placeholder="Sharma Ji Ki Shaadi" data-i18n-placeholder="guestPlaceholder">
+        </label>
+        <label class="field">
+          <span data-i18n="venue">Venue</span>
+          <input type="text" id="venue" placeholder="Hall or venue name" data-i18n-placeholder="venuePlaceholder">
+        </label>
+        <label class="field">
+          <span data-i18n="date">Date</span>
+          <input type="date" id="eventDate">
+        </label>
+        <label class="field">
+          <span data-i18n="contact">Contact</span>
+          <input type="tel" id="contactNo" inputmode="tel" placeholder="Mobile number" data-i18n-placeholder="contactPlaceholder">
+        </label>
+      </div>
+    </section>
+
+    <section class="control-panel" aria-label="History and sync">
+      <div class="control-group">
+        <div>
+          <p class="eyebrow" data-i18n="history">History</p>
+          <h2 data-i18n="savedRecords">Saved records</h2>
+        </div>
+        <div class="control-actions">
+          <button class="btn btn-primary" type="button" data-action="save-history" data-i18n="saveHistory">Save History</button>
+          <button class="btn btn-secondary" type="button" data-action="toggle-history" id="historyToggle" data-i18n="showHistory">Show History</button>
+          <button class="btn btn-accent" type="button" data-action="print-history" data-i18n="printHistory">Print History</button>
+        </div>
+      </div>
+
+      <div class="history-list" id="historyList" hidden></div>
+
+      <div class="control-group sync-group">
+        <div>
+          <p class="eyebrow" data-i18n="syncStorage">Device Sync</p>
+          <h2 data-i18n="multiDeviceSync">Google Drive auto sync</h2>
+          <span class="sync-status" id="syncStatus" data-i18n="localStorageReady">Local storage ready</span>
+        </div>
+        <div class="control-actions">
+          <button class="btn btn-primary" type="button" data-action="connect-sync" data-i18n="connectSyncFile">Pair Device</button>
+        </div>
+      </div>
+    </section>
+
+    <nav class="tabs-shell" aria-label="Menu headings">
+      <div class="tabs-row" id="tabsRow" role="tablist"></div>
+      <button class="btn btn-add-tab" type="button" data-action="add-tab" data-i18n="addHeading">Add Heading</button>
+    </nav>
+
+    <section class="meal-panel" aria-labelledby="mealBarLabel">
+      <div class="meal-title">
+        <p class="eyebrow" data-i18n="currentHeading">Current Heading</p>
+        <h2 id="mealBarLabel">-</h2>
+      </div>
+
+      <div class="meal-fields">
+        <label class="compact-field">
+          <span data-i18n="date">Date</span>
+          <input type="date" id="mealDate">
+        </label>
+        <label class="compact-field">
+          <span data-i18n="members">Members</span>
+          <input type="number" min="0" id="mealMembers" inputmode="numeric" placeholder="200">
+        </label>
+        <label class="compact-field">
+          <span data-i18n="pricePlate">Price / Plate</span>
+          <input type="number" min="0" id="mealPrice" inputmode="decimal" placeholder="450">
+        </label>
+        <label class="compact-field remark-field">
+          <span data-i18n="remark">Remark</span>
+          <textarea id="mealRemark" rows="2" placeholder="Special note for this function" data-i18n-placeholder="remarkPlaceholder"></textarea>
+        </label>
+        <div class="remark-actions">
+          <button class="btn btn-primary" type="button" data-action="save-remark" data-i18n="saveRemark">Save / Update Remark</button>
+          <button class="btn btn-secondary" type="button" data-action="delete-remark" data-i18n="deleteRemark">Delete Remark</button>
+        </div>
+      </div>
+
+      <div class="meal-total" id="mealTotal" aria-live="polite"></div>
+      <button class="icon-btn danger" type="button" id="deleteTabBtn" title="Delete custom heading" aria-label="Delete custom heading" data-i18n="delete" data-i18n-title="deleteCustomHeading" hidden>Delete</button>
+    </section>
+
+    <section class="summary-strip" aria-label="Menu summary">
+      <article class="summary-card">
+        <span class="summary-label" data-i18n="selectedItems">Selected Items</span>
+        <strong id="summarySelected">0</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label" data-i18n="estimateTotal">Estimate Total</span>
+        <strong id="summaryEstimate">₹ 0</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label" data-i18n="activeHeading">Active Heading</span>
+        <strong id="summaryActive">Breakfast</strong>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label" data-i18n="catalogSize">Catalog Size</span>
+        <strong id="summaryCatalog">0 items</strong>
+      </article>
+    </section>
+
+    <div class="workspace">
+      <section class="catalog-panel" aria-labelledby="catalogTitle">
+        <div class="catalog-toolbar">
+          <div>
+            <p class="eyebrow" data-i18n="catalog">Catalog</p>
+            <h2 id="catalogTitle" data-i18n="menuItems">Menu items</h2>
+          </div>
+
+          <div class="catalog-tools">
+            <label class="search-field">
+              <span class="sr-only" data-i18n="searchMenuItems">Search menu items</span>
+              <input type="search" id="srch" placeholder="Search items or categories" data-i18n-placeholder="searchPlaceholder">
+            </label>
+            <button class="btn btn-secondary" type="button" data-action="add-category" data-i18n="addCategory">Add Category</button>
+            <button class="btn btn-secondary" type="button" data-action="toggle-custom" data-i18n="addItem">Add Item</button>
+          </div>
+        </div>
+
+        <form class="custom-item-panel" id="customItemPanel" hidden>
+          <label class="field">
+            <span data-i18n="itemName">Item name</span>
+            <input type="text" id="ciName" placeholder="e.g. Paneer Tikka" data-i18n-placeholder="itemPlaceholder">
+          </label>
+          <label class="field">
+            <span data-i18n="hindiItemName">Hindi name</span>
+            <input type="text" id="ciHindiName" placeholder="जैसे पनीर टिक्का" data-i18n-placeholder="hindiItemPlaceholder">
+          </label>
+          <label class="field">
+            <span data-i18n="category">Category</span>
+            <select id="ciCat"></select>
+          </label>
+          <label class="field bulk-field">
+            <span data-i18n="bulkItems">Bulk items</span>
+            <textarea id="bulkItems" rows="3" placeholder="One item per line, comma, or semicolon" data-i18n-placeholder="bulkPlaceholder"></textarea>
+          </label>
+          <label class="field bulk-field">
+            <span data-i18n="bulkHindiItems">Bulk Hindi names</span>
+            <textarea id="bulkHindiItems" rows="3" placeholder="Same order as bulk items" data-i18n-placeholder="bulkHindiPlaceholder"></textarea>
+          </label>
+          <div class="custom-actions">
+            <button class="btn btn-primary" type="submit" data-i18n="addSingleItem">Add Item</button>
+            <button class="btn btn-accent" type="button" data-action="add-bulk" data-i18n="addBulkItems">Add Bulk Items</button>
+          </div>
+        </form>
+
+        <div class="catalog-meta" id="catalogMeta" aria-live="polite"></div>
+        <div class="category-list" id="cats"></div>
+      </section>
+
+      <aside class="selected-panel" aria-labelledby="selectedTitle">
+        <div class="selected-header">
+          <div>
+            <p class="eyebrow" data-i18n="selection">Selection</p>
+            <h2 id="selectedTitle" data-i18n="selectedItems">Selected items</h2>
+          </div>
+          <span class="selected-count" id="selectedCount">0</span>
+        </div>
+
+        <div class="selected-body" id="preview"></div>
+
+        <div class="selected-actions">
+          <button class="btn btn-primary" type="button" data-action="menu" data-i18n="generateMenu">Generate Menu</button>
+          <button class="btn btn-secondary" type="button" data-action="estimate" data-i18n="generateEstimate">Generate Estimate</button>
+          <button class="btn btn-accent" type="button" data-action="download" data-i18n="downloadDocument">Download Document</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="print-overlay" id="pmenu" hidden>
+    <div class="print-actions" aria-label="Document actions">
+      <button class="btn btn-secondary" type="button" data-action="print" data-i18n="print">Print</button>
+      <button class="btn btn-accent" type="button" data-action="download-document" data-i18n="download">Download</button>
+      <button class="btn btn-ghost" type="button" data-action="close-document" data-i18n="close">Close</button>
+    </div>
+    <div class="print-sheet" id="pmcontent"></div>
+  </div>
+
+  <dialog class="transfer-dialog" id="transferDialog">
+    <form class="transfer-card" method="dialog">
+      <div class="transfer-head">
+        <div>
+          <p class="eyebrow" data-i18n="transferCategory">Transfer Category</p>
+          <h2 id="transferCategoryName">-</h2>
+        </div>
+        <button class="icon-btn" type="button" data-action="close-transfer" aria-label="Close">×</button>
+      </div>
+      <label class="field">
+        <span data-i18n="targetHeading">Target Heading</span>
+        <select id="transferTarget"></select>
+      </label>
+      <label class="field">
+        <span data-i18n="transferMode">Transfer Mode</span>
+        <select id="transferMode">
+          <option value="copy" data-i18n="copyCategory">Copy category</option>
+          <option value="move" data-i18n="moveCategory">Move category</option>
+        </select>
+      </label>
+      <div class="transfer-actions">
+        <button class="btn btn-secondary" type="button" data-action="close-transfer" data-i18n="cancel">Cancel</button>
+        <button class="btn btn-primary" type="button" data-action="confirm-transfer" data-i18n="transfer">Transfer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="device-dialog" id="deviceDialog">
+    <form class="device-card" method="dialog">
+      <div class="transfer-head">
+        <div>
+          <p class="eyebrow" data-i18n="syncStorage">Device Sync</p>
+          <h2 data-i18n="connectDevicesTitle">Pair device</h2>
+        </div>
+        <button class="icon-btn" type="button" data-action="close-device-dialog" aria-label="Close">×</button>
+      </div>
+      <label class="field">
+        <span data-i18n="deviceAddress">Google sync link</span>
+        <input type="url" id="deviceLink" placeholder="Paste Google Apps Script web app URL" data-i18n-placeholder="deviceLinkPlaceholder">
+      </label>
+      <div class="device-status" id="deviceDialogStatus"></div>
+      <div class="transfer-actions">
+        <button class="btn btn-primary" type="button" data-action="pair-cloud-device" data-i18n="pairDevice">Pair Device</button>
+        <button class="btn btn-secondary" type="button" data-action="copy-device-link" data-i18n="copyLink">Copy Link</button>
+        <button class="btn btn-primary" type="button" data-action="close-device-dialog" data-i18n="done">Done</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <footer class="app-footer" data-i18n="creditText">
+    Developed by Nayan Parihar | 9669569070
+  </footer>
+</body>
+</html>

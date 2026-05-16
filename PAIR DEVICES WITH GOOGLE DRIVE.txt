@@ -1,0 +1,28 @@
+One-time setup:
+
+1. Open https://script.google.com
+2. Click New project.
+3. Delete the default code and paste everything from google-drive-sync.gs.
+4. Click Deploy > New deployment.
+5. Select type: Web app.
+6. Execute as: Me.
+7. Who has access: Anyone.
+8. Click Deploy, allow permissions, then copy the Web app URL ending in /exec.
+
+Pair each device:
+
+1. Open the Samruddhi app.
+2. Click Pair Device.
+3. Paste the same Web app URL.
+4. Click Pair Device.
+
+After this, phones, tablets, and laptops auto-sync through your Google Drive.
+
+Same-link setup:
+
+1. Pair one device with the Google sync link.
+2. Click Pair Device again.
+3. Click Copy Link.
+4. Open that copied app link on your other devices.
+
+That copied app link contains the sync setting, so each device pairs automatically.
