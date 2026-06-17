@@ -5,7 +5,7 @@
   const LEGACY_STORAGE_KEYS = ['samruddhi-menu-builder-state-v2'];
   const NEW_CATEGORY_VALUE = '__new__';
   const CUSTOM_TAB_PREFIX = 'custom_';
-  const CREDIT_TEXT = 'Developed by Nayan Parihar | 9669569070';
+  const CREDIT_TEXT = 'Developed by Nayan Parihar';
   const APP_ID = 'samruddhi-menu-builder';
   const HISTORY_LIMIT = 60;
   const SYNC_POLL_MS = 5000;
@@ -29,7 +29,7 @@
   const I18N = {
     en: {
       brandTagline: "Event's Organizer & Caterers",
-      creditText: 'Developed by Nayan Parihar | 9669569070',
+      creditText: 'Developed by Nayan Parihar',
       switchToHindi: 'हिन्दी',
       switchToEnglish: 'English',
       clear: 'Clear',
@@ -226,7 +226,7 @@
     },
     hi: {
       brandTagline: 'इवेंट ऑर्गनाइज़र और कैटरर्स',
-      creditText: 'डेवलप्ड बाय नयन परिहार | 9669569070',
+      creditText: 'Developed by Nayan Parihar',
       switchToHindi: 'हिन्दी',
       switchToEnglish: 'English',
       clear: 'साफ करें',
